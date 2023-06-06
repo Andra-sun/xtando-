@@ -1,119 +1,92 @@
 <!DOCTYPE html>
 
 <html>
+    <head>
+        <title>Calculadora de Conversão</title>
 
-<head>
+        <script>
+            function converter() {
+                // Obter o valor em metros
 
-  <title>Calculadora de Conversão</title>
+                var metros = parseFloat(
+                    document.getElementById("metros").value
+                );
 
-  <script>
+                // Obter as unidades de medida selecionadas
 
-    function converter() {
+                var unidadeInicial =
+                    document.getElementById("unidade-inicial").value;
 
-      // Obter o valor em metros
+                var unidadeFinal =
+                    document.getElementById("unidade-final").value;
 
-      var metros = parseFloat(document.getElementById("metros").value);
+                // Fator de conversão
 
-      // Obter as unidades de medida selecionadas
+                var fator = 1; // Fator inicial, considerando que a unidade inicial é metros
 
-      var unidadeInicial = document.getElementById("unidade-inicial").value;
+                // Definir o fator de conversão com base nas unidades selecionadas
 
-      var unidadeFinal = document.getElementById("unidade-final").value;
+                if (unidadeInicial === "metros") {
+                    if (unidadeFinal === "quilometros") {
+                        fator = 0.001;
+                    } else if (unidadeFinal === "milhas") {
+                        fator = 0.000621371;
+                    }
+                } else if (unidadeInicial === "quilometros") {
+                    if (unidadeFinal === "metros") {
+                        fator = 1000;
+                    } else if (unidadeFinal === "milhas") {
+                        fator = 0.621371;
+                    }
+                } else if (unidadeInicial === "milhas") {
+                    if (unidadeFinal === "metros") {
+                        fator = 1609.34;
+                    } else if (unidadeFinal === "quilometros") {
+                        fator = 1.60934;
+                    }
+                }
 
-      // Fator de conversão
+                // Realizar a conversão
 
-      var fator = 1; // Fator inicial, considerando que a unidade inicial é metros
+                var resultado = metros * fator;
 
-      // Definir o fator de conversão com base nas unidades selecionadas
+                // Exibir o resultado
 
-      if (unidadeInicial === "metros") {
+                document.getElementById("resultado").innerHTML =
+                    resultado + " " + unidadeFinal;
+            }
+        </script>
+    </head>
 
-        if (unidadeFinal === "quilometros") {
+    <body>
+        <h1>Calculadora de Conversão de Distância</h1>
 
-          fator = 0.001;
+        <label for="metros">Digite o valor em metros:</label>
 
-        } else if (unidadeFinal === "milhas") {
+        <input type="number" id="metros" />
 
-          fator = 0.000621371;
+        <label for="unidade-inicial">Unidade Inicial:</label>
 
-        }
+        <select id="unidade-inicial">
+            <option value="metros">Metros</option>
 
-      } else if (unidadeInicial === "quilometros") {
+            <option value="quilometros">Quilômetros</option>
 
-        if (unidadeFinal === "metros") {
+            <option value="milhas">Milhas</option>
+        </select>
 
-          fator = 1000;
+        <label for="unidade-final">Unidade Final:</label>
 
-        } else if (unidadeFinal === "milhas") {
+        <select id="unidade-final">
+            <option value="metros">Metros</option>
 
-          fator = 0.621371;
+            <option value="quilometros">Quilômetros</option>
 
-        }
+            <option value="milhas">Milhas</option>
+        </select>
 
-      } else if (unidadeInicial === "milhas") {
+        <button onclick="converter()">Converter</button>
 
-        if (unidadeFinal === "metros") {
-
-          fator = 1609.34;
-
-        } else if (unidadeFinal === "quilometros") {
-
-          fator = 1.60934;
-
-        }
-
-      }
-
-      // Realizar a conversão
-
-      var resultado = metros * fator;
-
-      // Exibir o resultado
-
-      document.getElementById("resultado").innerHTML = resultado + " " + unidadeFinal;
-
-    }
-
-  </script>
-
-</head>
-
-<body>
-
-  <h1>Calculadora de Conversão de Distância</h1>
-
-  <label for="metros">Digite o valor em metros:</label>
-
-  <input type="number" id="metros" />
-
-  <label for="unidade-inicial">Unidade Inicial:</label>
-
-  <select id="unidade-inicial">
-
-    <option value="metros">Metros</option>
-
-    <option value="quilometros">Quilômetros</option>
-
-    <option value="milhas">Milhas</option>
-
-  </select>
-
-  <label for="unidade-final">Unidade Final:</label>
-
-  <select id="unidade-final">
-
-    <option value="metros">Metros</option>
-
-    <option value="quilometros">Quilômetros</option>
-
-    <option value="milhas">Milhas</option>
-
-  </select>
-
-  <button onclick="converter()">Converter</button>
-
-  <p id="resultado"></p>
-
-</body>
-
+        <p id="resultado"></p>
+    </body>
 </html>
